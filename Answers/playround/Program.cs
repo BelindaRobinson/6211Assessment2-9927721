@@ -9,10 +9,12 @@ namespace Answers
 {
     class Program
     {
-        static void Main(int[] args)
+        static void Main(string[] args)
         {
 
-            string[] MData = new string[100];
+            int[] MData = new int[100];
+            int[] MData2 = MData;
+            
 
             string menuchoice = "0";
 
@@ -35,6 +37,11 @@ namespace Answers
                         menuchoice = "0";
                         break;
 
+                    case "2":
+                        ImportData(MData);
+                        menuchoice = "0";
+                        break;
+
                     default:
                         Console.WriteLine("Sorry that choice is not a available");
                         menuchoice = "0";
@@ -42,20 +49,45 @@ namespace Answers
                 }
             }
         }
-        public static void ImportData(string[] MData)
+        public static void ImportData(int[] MData)
         {
-            StreamReader Moisture = new StreamReader("../../Moisture_Data.txt");
+            StreamReader Moisture = new StreamReader("../../Moisture_Data.txt"); // reading the text file that iss added to solution ../../ changes levels
 
-            for (int i = 0; i < 100; i++)
-            {
-                MData[i] = Moisture.ReadLine();
-            }
+            string myString = Moisture.ReadToEnd();
 
             Moisture.Close();
-
             
+            char rc = (char)10;
+            String[] listLines = myString.Split(rc);
+            List<List<int>> listArrays = new List<List<int>>();
+            for (int i = 0; i < listLines.Length; i++)
+            {
+                List<int> array = new List<int>();
+                String[] listInts = listLines[i].Split(' ');
+                for (int j = 0; j < listInts.Length; j++)
+                {
+                    if (listInts[j] != "\r")
+                    {
+                        array.Add(Moisture);
+                    }
+                }
+                listArrays.Add(array);
+
+                for (int a = 0; a < 100; a++)
+                {
+                    Console.WriteLine(array[]);
+                }
+                Console.ReadLine();
+
+
+                /*for (int i = 0; i < 100; i++) // adding each of the 100 lines to the array
+                {
+                    MData[i] = Moisture.ReadLine();
+                }
+                Moisture.Close();*/
+            }
         }
-        public static void FindMaximum(string[] MData)
+        public static void FindMaximum(int[] MData)
         {
             ImportData(MData);
 
@@ -71,7 +103,7 @@ namespace Answers
             
         }
 
-        public static void PrintArray(string[] MData)
+        public static void PrintArray(int[] MData)
         {
             ImportData(MData);
 
