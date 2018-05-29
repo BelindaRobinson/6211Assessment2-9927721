@@ -12,7 +12,7 @@ namespace Answers
         static void Main(string[] args)
         {
 
-            string[] MData = new string[100];
+            int[] MData = new int[100];
 
 
             string menuchoice = "0";
@@ -82,28 +82,29 @@ namespace Answers
             }
         }
 
-        private static void ImprovedBubbleSort(string[] mData)
+        private static void ImprovedBubbleSort(int[] mData)
         {
             throw new NotImplementedException();
         }
 
-        private static void BubbleSort(string[] mData)
+        private static void BubbleSort(int[] mData)
         {
             throw new NotImplementedException();
         }
 
-        public static void ImportData(string[] MData)
+        public static void ImportData(int[] MData)
         {
             StreamReader Moisture = new StreamReader("../../Moisture_Data.txt"); // reading the text file that iss added to solution ../../ changes levels
 
             for (int i = 0; i < 100; i++) // adding each of the 100 lines to the array
             {
-                MData[i] = Moisture.ReadLine();
+                //MData[i] = Moisture.ReadLine();
+                Console.WriteLine(MData[i]);
             }
             Moisture.Close();
         }
 
-        public static void FindMaximum(string[] MData)
+        public static void FindMaximum(int[] MData)
         {
             ImportData(MData); // Holds all the data to find values
 
@@ -112,8 +113,8 @@ namespace Answers
 
             Console.WriteLine(MData.Max());
 
-            /*
-            string Max = MData[0]; // having string and int issues, commenting out so programe runs
+            
+            int Max = MData[0]; // having string and int issues, commenting out so programe runs
 
             for (int i = 0; i < MData.Length; i++)
             {
@@ -122,10 +123,10 @@ namespace Answers
                     Max = MData[i];                    
                 }                
             }
-            */
+            
         }
 
-        public static void PrintArray(string[] MData) // MData in main being pulled though each method
+        public static void PrintArray(int[] MData) // MData in main being pulled though each method
         {
             ImportData(MData); // calling premade method
 
@@ -138,15 +139,15 @@ namespace Answers
             Console.ReadLine();
         }
 
-        public static void SelectionSort(string[] MData)
+        public static void SelectionSort(int[] MData)
         {
-            //int d, a, m; // see issues below
+            int d, a, m; // see issues below
 
             Console.WriteLine("Original Array List");
             PrintArray(MData);
 
             Console.WriteLine("Selection Sorted List");
-            /*
+            
             for (int i = 0; i < MData.Length - 1; i++) // string to string issues, commenting out so program runs
             {
                 a = i;
@@ -166,7 +167,7 @@ namespace Answers
                     MData[a] = d;
                 }            
             }
-            */
+            
             Array.Sort(MData);
             Array.Reverse(MData);
             Console.WriteLine(MData);
@@ -178,12 +179,12 @@ namespace Answers
 
         }
 
-        public static void LinearSearch(string[] MData)
+        public static void LinearSearch(int[] MData)
         {
 
         }
 
-        public static void CompareArrays(string[] MData)
+        public static void CompareArrays(int[] MData)
         {
 
         }
