@@ -82,7 +82,7 @@ namespace Answers
             }
         }
 
-        private static void ImprovedBubbleSort(int[] mData)
+        private static void ImprovedBubbleSort(int[] mData) // here to make menu work with other bubble class
         {
             throw new NotImplementedException();
         }
@@ -94,14 +94,20 @@ namespace Answers
 
         public static void ImportData(int[] MData)
         {
-            StreamReader Moisture = new StreamReader("../../Moisture_Data.txt"); // reading the text file that iss added to solution ../../ changes levels
-
-            for (int i = 0; i < 100; i++) // adding each of the 100 lines to the array
+            try
             {
-                //MData[i] = Moisture.ReadLine();
-                Console.WriteLine(MData[i]);
+                using (StreamReader Moisture = new StreamReader("../../Moisture_Data.txt"))
+                {
+                    string Data = Moisture.ReadToEnd();
+                    Console.WriteLine(Data);
+                }
             }
-            Moisture.Close();
+
+            catch (Exception e)
+            {
+                Console.WriteLine("cant read file");
+                Console.WriteLine(e.Message);
+            }
         }
 
         public static void FindMaximum(int[] MData)
@@ -114,7 +120,7 @@ namespace Answers
             Console.WriteLine(MData.Max());
 
             
-            int Max = MData[0]; // having string and int issues, commenting out so programe runs
+            int Max = MData[0]; 
 
             for (int i = 0; i < MData.Length; i++)
             {
@@ -134,21 +140,20 @@ namespace Answers
 
             for (int i = 0; i < 100; i++)
             {
-                Console.WriteLine(MData[i]); // displaying the original array for the datafile
+                Console.Write(MData[i]); // displaying the original array for the datafile
             }
             Console.ReadLine();
         }
 
         public static void SelectionSort(int[] MData)
         {
-            int d, a, m; // see issues below
+            int d, a; 
 
-            Console.WriteLine("Original Array List");
             PrintArray(MData);
 
             Console.WriteLine("Selection Sorted List");
             
-            for (int i = 0; i < MData.Length - 1; i++) // string to string issues, commenting out so program runs
+            for (int i = 0; i < MData.Length - 1; i++) 
             {
                 a = i;
                 
@@ -165,7 +170,9 @@ namespace Answers
                     d = MData[i];
                     MData[i] = MData[a];
                     MData[a] = d;
-                }            
+                }
+                
+                
             }
             
             Array.Sort(MData);
@@ -175,7 +182,8 @@ namespace Answers
             Console.WriteLine(MData.Max());
             Console.WriteLine("Minimum value");
             Console.WriteLine(MData.Min());
-            //Console.WriteLine(MData.Average()); // string and int issue, really need to work on this
+            Console.WriteLine("Average value");
+            Console.WriteLine(MData.Average()); 
 
         }
 
