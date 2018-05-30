@@ -12,7 +12,7 @@ namespace Answers
         static void Main(string[] args)
         {
 
-            int[] MData = new int[100];
+            string[] MData = new string[100];
 
 
             string menuchoice = "0";
@@ -82,35 +82,28 @@ namespace Answers
             }
         }
 
-        private static void ImprovedBubbleSort(int[] mData) // here to make menu work with other bubble class
+        private static void ImprovedBubbleSort(string[] mData)
         {
             throw new NotImplementedException();
         }
 
-        private static void BubbleSort(int[] mData)
+        private static void BubbleSort(string[] mData)
         {
             throw new NotImplementedException();
         }
 
-        public static void ImportData(int[] MData)
+        public static void ImportData(string[] MData)
         {
-            try
-            {
-                using (StreamReader Moisture = new StreamReader("../../Moisture_Data.txt"))
-                {
-                    string Data = Moisture.ReadToEnd();
-                    Console.WriteLine(Data);
-                }
-            }
+            StreamReader Moisture = new StreamReader("../../Moisture_Data.txt"); // reading the text file that iss added to solution ../../ changes levels
 
-            catch (Exception e)
+            for (int i = 0; i < 100; i++) // adding each of the 100 lines to the array
             {
-                Console.WriteLine("cant read file");
-                Console.WriteLine(e.Message);
+                MData[i] = Moisture.ReadLine();
             }
+            Moisture.Close();
         }
 
-        public static void FindMaximum(int[] MData)
+        public static void FindMaximum(string[] MData)
         {
             ImportData(MData); // Holds all the data to find values
 
@@ -119,9 +112,8 @@ namespace Answers
 
             Console.WriteLine(MData.Max());
 
-            
-            int Max = MData[0]; 
-
+            /*
+            string Max = MData[0]; // having string and int issues, commenting out so programe runs
             for (int i = 0; i < MData.Length; i++)
             {
                 if (MData[i] > Max)
@@ -129,10 +121,10 @@ namespace Answers
                     Max = MData[i];                    
                 }                
             }
-            
+            */
         }
 
-        public static void PrintArray(int[] MData) // MData in main being pulled though each method
+        public static void PrintArray(string[] MData) // MData in main being pulled though each method
         {
             ImportData(MData); // calling premade method
 
@@ -140,20 +132,21 @@ namespace Answers
 
             for (int i = 0; i < 100; i++)
             {
-                Console.Write(MData[i]); // displaying the original array for the datafile
+                Console.WriteLine(MData[i]); // displaying the original array for the datafile
             }
             Console.ReadLine();
         }
 
-        public static void SelectionSort(int[] MData)
+        public static void SelectionSort(string[] MData)
         {
-            int d, a; 
+            //int d, a, m; // see issues below
 
+            Console.WriteLine("Original Array List");
             PrintArray(MData);
 
             Console.WriteLine("Selection Sorted List");
-            
-            for (int i = 0; i < MData.Length - 1; i++) 
+            /*
+            for (int i = 0; i < MData.Length - 1; i++) // string to string issues, commenting out so program runs
             {
                 a = i;
                 
@@ -164,17 +157,14 @@ namespace Answers
                         a = b;
                     }
                 }
-
                 if (a != 1)
                 {
                     d = MData[i];
                     MData[i] = MData[a];
                     MData[a] = d;
-                }
-                
-                
+                }            
             }
-            
+            */
             Array.Sort(MData);
             Array.Reverse(MData);
             Console.WriteLine(MData);
@@ -182,17 +172,16 @@ namespace Answers
             Console.WriteLine(MData.Max());
             Console.WriteLine("Minimum value");
             Console.WriteLine(MData.Min());
-            Console.WriteLine("Average value");
-            Console.WriteLine(MData.Average()); 
+            //Console.WriteLine(MData.Average()); // string and int issue, really need to work on this
 
         }
 
-        public static void LinearSearch(int[] MData)
+        public static void LinearSearch(string[] MData)
         {
 
         }
 
-        public static void CompareArrays(int[] MData)
+        public static void CompareArrays(string[] MData)
         {
 
         }
