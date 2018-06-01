@@ -12,7 +12,7 @@ namespace Answers
         static void Main(string[] args)
         {
 
-            int[] MData = new int[100];
+            int[] MData = new int[100]; // decimal 
 
 
             string menuchoice = "0";
@@ -96,7 +96,7 @@ namespace Answers
         {
             try
             {
-                using (StreamReader Moisture = new StreamReader("../../Moisture_Data.txt"))
+                using (StreamReader Moisture = new StreamReader("../../Moisture_Data.txt")) // week8 at the bottom and change into main method, dont use streamreader
                 {
                     string Data = Moisture.ReadToEnd();
                     Console.WriteLine(Data);
@@ -108,6 +108,13 @@ namespace Answers
                 Console.WriteLine("cant read file");
                 Console.WriteLine(e.Message);
             }
+
+            string[] input = File.ReadLines(@"c:\Data.txt").ToArray(); //class week8 file reader 
+            for (int i = 0; i < input.Length; i++)
+            {
+                Console.Write(input[i] + " ");
+            }
+            Console.WriteLine();
         }
 
         public static void FindMaximum(int[] MData)
@@ -120,14 +127,16 @@ namespace Answers
             Console.WriteLine(MData.Max());
 
 
-            int Max = MData[0];
+            int Max = MData[0]; // string not int
 
-            for (int i = 0; i < MData.Length; i++)
+            for (int i = 0; i < MData.Length; i++) // this within another loop 
             {
                 if (MData[i] > Max)
                 {
                     Max = MData[i];
                 }
+                int index =Array.FindIndex(MData, Max);
+                MData[index] = 0;
             }
 
         }
