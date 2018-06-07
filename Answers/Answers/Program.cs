@@ -12,22 +12,33 @@ namespace Answers
         static void Main(string[] args)
         {
 
-            int[] MData = new int[100]; // decimal 
+            decimal[] MData = new decimal[100]; // decimal 
 
+            decimal DData = MData[100];
 
+            string[] input = File.ReadLines("../../Moisture_Data.txt").ToArray(); //class week8 file reader 
+            for (int i = 0; i < input.Length; i++)
+            {
+                Console.Write(input[i] + " ");
+                string Dinput = input[i];
+
+                if (Decimal.TryParse(Dinput, out DData))
+                {
+                    Console.WriteLine(MData);
+                }
+            }
+            Console.WriteLine();
+
+            
             string menuchoice = "0";
 
             while (menuchoice == "0")
             {
-                Console.WriteLine("Please select a topic");
-                Console.WriteLine("1. Import Data");
-                Console.WriteLine("2. Find Maximum");
-                Console.WriteLine("3. Print Array");
-                Console.WriteLine("4. Selection Sort");
-                Console.WriteLine("5. Linear Search");
-                Console.WriteLine("6. Compare Arrays");
-                Console.WriteLine("7. Bubble Sort");
-                Console.WriteLine("8. Improved Bubble Sort");
+                Console.WriteLine("Please select a topic"); //change cases to each question instead
+                Console.WriteLine("1. Question1");
+                Console.WriteLine("2. Question2");
+                Console.WriteLine("3. Question3");
+                Console.WriteLine("4. Question4");        
 
                 menuchoice = Console.ReadLine();
 
@@ -35,45 +46,28 @@ namespace Answers
                 {
 
                     case "1":
-                        ImportData(MData);
-                        menuchoice = "0";
-                        break;
-
-                    case "2":
                         FindMaximum(MData);
-                        menuchoice = "0";
-                        break;
-
-                    case "3":
                         PrintArray(MData);
                         menuchoice = "0";
                         break;
 
-                    case "4":
+                    case "2":
                         SelectionSort(MData);
                         menuchoice = "0";
                         break;
 
-                    case "5":
+                    case "3":
                         LinearSearch(MData);
-                        menuchoice = "0";
-                        break;
-
-                    case "6":
                         CompareArrays(MData);
                         menuchoice = "0";
                         break;
 
-                    case "7":
+                    case "4":
                         BubbleSort(MData);
-                        menuchoice = "0";
-                        break;
-
-                    case "8":
                         ImprovedBubbleSort(MData);
                         menuchoice = "0";
                         break;
-
+                   
                     default:
                         Console.WriteLine("Sorry that choice is not a available");
                         menuchoice = "0";
@@ -82,18 +76,19 @@ namespace Answers
             }
         }
 
-        private static void ImprovedBubbleSort(int[] mData) // here to make menu work with other bubble class
+        private static void ImprovedBubbleSort(decimal[] mData) // here to make menu work with other bubble class
         {
             throw new NotImplementedException();
         }
 
-        private static void BubbleSort(int[] mData)
+        private static void BubbleSort(decimal[] mData)
         {
             throw new NotImplementedException();
         }
 
-        public static void ImportData(int[] MData)
+        public static void ImportData(decimal[] MData)
         {
+            /*
             try
             {
                 using (StreamReader Moisture = new StreamReader("../../Moisture_Data.txt")) // week8 at the bottom and change into main method, dont use streamreader
@@ -108,16 +103,24 @@ namespace Answers
                 Console.WriteLine("cant read file");
                 Console.WriteLine(e.Message);
             }
+            */
+            decimal DData;
 
-            string[] input = File.ReadLines(@"c:\Data.txt").ToArray(); //class week8 file reader 
+            string[] input = File.ReadLines("../../Moisture_Data.txt").ToArray(); //class week8 file reader 
             for (int i = 0; i < input.Length; i++)
             {
                 Console.Write(input[i] + " ");
+                string Dinput = input[i];
+                if (Decimal.TryParse(Dinput, out DData))
+                {
+                    Console.WriteLine(DData);
+                }
             }
             Console.WriteLine();
+
         }
 
-        public static void FindMaximum(int[] MData)
+        public static void FindMaximum(decimal[] MData)
         {
             ImportData(MData); // Holds all the data to find values
 
@@ -127,21 +130,23 @@ namespace Answers
             Console.WriteLine(MData.Max());
 
 
-            int Max = MData[0]; // string not int
+            string Max = MData[i];  // string not int
 
-            for (int i = 0; i < MData.Length; i++) // this within another loop 
-            {
-                if (MData[i] > Max)
+            for (int i = 0; i < MData.Length; i++)
+            {               
+                for (int a = -1; a < MData.Length; a++) // this within another loop 
                 {
-                    Max = MData[i];
+                    if (decimal.TryParse(Max, out MData) > Max)
+                    {
+                        Max = MData[a];
+                    }
+                    int index = Array.FindIndex(MData, Max);
+                    MData[index] = 0;
                 }
-                int index =Array.FindIndex(MData, Max);
-                MData[index] = 0;
             }
-
         }
 
-        public static void PrintArray(int[] MData) // MData in main being pulled though each method
+        public static void PrintArray(decimal[] MData) // MData in main being pulled though each method
         {
             ImportData(MData); // calling premade method
 
@@ -154,9 +159,10 @@ namespace Answers
             Console.ReadLine();
         }
 
-        public static void SelectionSort(int[] MData)
+        public static void SelectionSort(decimal[] MData)
         {
-            int d, a;
+            int d = 0;
+            int a = 0;
 
             PrintArray(MData);
 
@@ -175,33 +181,44 @@ namespace Answers
                 }
 
                 if (a != 1)
-                {
+                {                    
+                    
                     d = MData[i];
                     MData[i] = MData[a];
                     MData[a] = d;
                 }
+            }       
+            
+            Console.WriteLine("Maximum value is {0}", MData[99]);
+            
+            Console.WriteLine("Minimum value is {0}", MData[0]);
 
+            Average = 0;
+            Total = 0;
 
+            for (int b = 0; b < MData.Length; b++)
+            {
+                Total = MData[b]
             }
+            // need to find total then / to get average
 
-            Array.Sort(MData);
-            Array.Reverse(MData);
-            Console.WriteLine(MData);
-            Console.WriteLine("Maximum value");
-            Console.WriteLine(MData.Max());
-            Console.WriteLine("Minimum value");
-            Console.WriteLine(MData.Min());
             Console.WriteLine("Average value");
-            Console.WriteLine(MData.Average());
+            
 
         }
 
-        public static void LinearSearch(int[] MData)
+        public static void LinearSearch(decimal[] MData, DData[100])
         {
-
+            for (int i = 0; i < MData.Length; i++)
+            {
+                if (MData[i] == Data)
+                    return true;
+                return false;
+            }
+            
         }
 
-        public static void CompareArrays(int[] MData)
+        public static void CompareArrays(decimal[] MData)
         {
 
         }
@@ -218,5 +235,7 @@ namespace Answers
         {
 
         }
+        
+        
     }
 }
